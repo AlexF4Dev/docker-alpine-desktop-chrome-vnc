@@ -60,8 +60,8 @@ EXPOSE 22 5900
 
 # RUN echo "CHROMIUM_FLAGS='--no-sandbox --disable-gpu --user-data-dir --window-size=${VNC_RESOLUTION%x*},${VNC_RESOLUTION#*x} --window-position=0,0'" > ${HOME}/.chromium-browser.init
 RUN echo "CHROMIUM_FLAGS='--no-sandbox --disable-gpu --user-data-dir --window-position=0,0'" > ${HOME}/.chromium-browser.init
-RUN sed -i -e 's@Exec=/usr/bin/chromium-browser@Exec=/usr/bin/chromium-browser --no-sandbox@g' /usr/share/applications/chromium.desktop 
-RUN sed -i -e 's@Exec=exo-open --launch WebBrowser %u@Exec=/usr/bin/chromium-browser --no-sandbox@g' /usr/share/applications/xfce4-web-browser.desktop
+RUN sed -i -e 's@Exec=/usr/bin/chromium-browser@Exec=/usr/bin/chromium-browser --no-sandbox --disable-dev-shm-usage@g' /usr/share/applications/chromium.desktop 
+RUN sed -i -e 's@Exec=exo-open --launch WebBrowser %u@Exec=/usr/bin/chromium-browser --no-sandbox --disable-dev-shm-usage@g' /usr/share/applications/xfce4-web-browser.desktop
 
 # default command
 CMD ["/usr/bin/supervisord","-c","/etc/supervisord.conf"]
